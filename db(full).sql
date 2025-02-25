@@ -20,33 +20,33 @@ CREATE TABLE Offers (
     ID SERIAL PRIMARY KEY,
     landSize DECIMAL(10, 2) NOT NULL,
     landLocation VARCHAR(255) NOT NULL,
+    --locMap text,
     offerDescription TEXT,
     landLeasePrice DECIMAL(10, 2) NOT NULL,-- in jordan its impossible but may be in other countries--
     landLeaseType VARCHAR(50) NOT NULL,
     landPicture TEXT, 
-    offerDate TIMESTAMP NOT NULL DEFAULT CURRENT_DATE, 
+    offerDate Date NOT NULL DEFAULT CURRENT_DATE, 
     OwnerID INT NOT NULL   REFERENCES Landowners(ID) ON DELETE CASCADE
    
 );
+
 CREATE TABLE  landPicture(
 ID SERIAL PRIMARY KEY,
 	landID int not null REFERENCES offers(id) on delete cascade,
 	url TEXT 
 );
 
-
-
-CREATE TABLE fo (
+CREATE TABLE FavoriteOffers (
 	--FavoriteOffers--
     farmerID INT not null REFERENCES farmers(id) on delete cascade ,
     offerID INT not null references offers(id) on delete cascade,
     PRIMARY KEY (farmerID, offerID)
 );
-CREATE TABLE ER (
+CREATE TABLE EducationalResource (
 	--EducationalResource--
 	-- in docs its linked with user but i see its unuseful?!--
     resourceID SERIAL PRIMARY KEY,
-    link text NOT NULL,
+    url text NOT NULL,
     type varchar(50) not null
 );
 CREATE TABLE Notifications (
